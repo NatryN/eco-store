@@ -1,5 +1,6 @@
 const { useState, useMemo, useEffect } = React;
 
+// 1. Mapeo de productos actualizado con las rutas de imágenes locales
 const PRODUCTS = [
   {
     id: 1,
@@ -8,7 +9,7 @@ const PRODUCTS = [
     price: 1299.90,
     rating: 4.9,
     offer: true,
-    icon: "☀️",
+    image: "img/panelSolar450.jpg",
     description: "Panel solar de alta eficiencia para hogares y pequeños negocios."
   },
   {
@@ -18,7 +19,7 @@ const PRODUCTS = [
     price: 1890.00,
     rating: 4.8,
     offer: false,
-    icon: "🔋",
+    image: "img/ecoShell.avif",
     description: "Batería inteligente de respaldo con monitoreo del consumo."
   },
   {
@@ -28,7 +29,7 @@ const PRODUCTS = [
     price: 79.90,
     rating: 4.6,
     offer: true,
-    icon: "💡",
+    image: "img/focoSmart.webp",
     description: "Iluminación LED inteligente con ahorro y control programado."
   },
   {
@@ -38,7 +39,7 @@ const PRODUCTS = [
     price: 249.50,
     rating: 4.7,
     offer: false,
-    icon: "🌿",
+    image: "img/sensorAir.jpg",
     description: "Mide calidad de aire, humedad y temperatura en tiempo real."
   },
   {
@@ -48,7 +49,7 @@ const PRODUCTS = [
     price: 159.90,
     rating: 4.5,
     offer: true,
-    icon: "🔆",
+    image: "img/cargadorSolar.jpg",
     description: "Cargador portátil para celulares y dispositivos en exteriores."
   },
   {
@@ -58,7 +59,7 @@ const PRODUCTS = [
     price: 329.00,
     rating: 4.8,
     offer: false,
-    icon: "🌡️",
+    image: "img/termostatoEco.jpg",
     description: "Controla temperatura y reduce el consumo eléctrico."
   },
   {
@@ -68,7 +69,7 @@ const PRODUCTS = [
     price: 289.00,
     rating: 4.4,
     offer: true,
-    icon: "💧",
+    image: "img/kitRiego.webp",
     description: "Automatiza el riego según humedad del suelo y horario."
   },
   {
@@ -78,7 +79,7 @@ const PRODUCTS = [
     price: 4599.00,
     rating: 4.9,
     offer: false,
-    icon: "🚲",
+    image: "img/bicicletaUrban.jpg",
     description: "Movilidad urbana eléctrica con autonomía extendida."
   },
   {
@@ -88,7 +89,7 @@ const PRODUCTS = [
     price: 410.00,
     rating: 4.3,
     offer: false,
-    icon: "📶",
+    image: "img/routerGreen.jpg",
     description: "Router eficiente con gestión inteligente de consumo."
   }
 ];
@@ -298,12 +299,18 @@ function Filters({ search, setSearch, category, setCategory, sort, setSort, cate
 }
 
 function ProductCard({ product, onAdd }) {
- 
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <article className="card">
-      <div className="card-media">{product.icon}</div>
+      {/* 2. Actualización de contenedor de imagen de producto */}
+      <div className="card-media">
+        <img 
+          src={product.image} 
+          alt={product.name} 
+          style={{ width: "100%", height: "100%", objectFit: "cover" }} 
+        />
+      </div>
 
       <div className="card-body">
         <div className="badges">
@@ -326,7 +333,6 @@ function ProductCard({ product, onAdd }) {
             Agregar al carrito
           </button>
           
-          {/* Al hacer clic, invertimos el estado actual (de false a true y viceversa) */}
           <button
             className="btn btn-secondary"
             onClick={() => setIsExpanded(!isExpanded)}
@@ -336,7 +342,6 @@ function ProductCard({ product, onAdd }) {
         </div>
       </div>
 
-      {/* Renderizado condicional: Si isExpanded es true, mostramos esta extensión abajo */}
       {isExpanded && (
         <div className="card-details">
           <h4>Especificaciones:</h4>
@@ -644,7 +649,14 @@ function CartDrawer({ open, onClose, cart, setCart }) {
           ) : (
             cart.map((item) => (
               <div className="cart-item" key={item.id}>
-                <div className="cart-icon">{item.icon}</div>
+                {/* 3. Actualización de imagen en el carrito */}
+                <div className="cart-icon">
+                  <img 
+                    src={item.image} 
+                    alt={item.name} 
+                    style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "10px" }} 
+                  />
+                </div>
 
                 <div>
                   <strong>{item.name}</strong>

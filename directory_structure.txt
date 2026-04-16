@@ -1,0 +1,15 @@
+.
+├── app.js
+├── directory_structure.txt
+├── img
+│   ├── bicicletaUrban.jpg
+│   ├── cargadorSolar.jpg
+│   ├── ecoShell.avif
+│   ├── focoSmart.webp
+│   ├── kitRiego.webp
+│   ├── panelSolar450.jpg
+│   ├── routerGreen.jpg
+│   ├── sensorAir.jpg
+│   └── termostatoEco.jpg
+├── index.html
+└── styles.css
