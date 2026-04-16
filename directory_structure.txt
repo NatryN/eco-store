@@ -7,6 +7,7 @@
 │   ├── cargadorSolar.jpg
 │   ├── compraEco.png
 │   ├── ecoShell.avif
+│   ├── Ecotech-Enviro-Logo-2048x662.png
 │   ├── focoSmart.webp
 │   ├── kitRiego.webp
 │   ├── panelSolar450.jpg

@@ -151,11 +151,16 @@ function Header({ cartCount, onOpenCart }) {
   return (
     <header className="header">
       <div className="container header-inner">
-        <div className="logo">
-          <div className="logo-mark">E</div>
-          <div>
-            <div>EcoTech Store</div>
-            <small>Compromiso Verde</small>
+        <div className="logo" style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          {/* Se reemplaza el logo-mark por la imagen real */}
+          <img 
+            src="img/Ecotech-Enviro-Logo-2048x662.png" 
+            alt="EcoTech Logo" 
+            style={{ height: "50px", width: "auto", objectFit: "contain" }} 
+          />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+           
+            <small style={{ color: "var(--muted)", fontWeight: "500" }}>Compromiso Verde</small>
           </div>
         </div>
 
