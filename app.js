@@ -1,6 +1,6 @@
 const { useState, useMemo, useEffect } = React;
 
-// 1. Mapeo de productos actualizado con las rutas de imágenes locales
+// 1. Mapeo de productos (Se mantienen tus rutas de imágenes de productos)
 const PRODUCTS = [
   {
     id: 1,
@@ -98,41 +98,45 @@ const REVIEWS = [
   {
     name: "Valeria Gómez",
     role: "Arquitecta sostenible",
-    text: "La interfaz es limpia, rápida y transmite profesionalismo. El catálogo está bien organizado."
+    text: "La calidad de los paneles y el asesoramiento para reducir mi huella de carbono fueron excepcionales."
   },
   {
     name: "Diego Paredes",
     role: "Jefe de operaciones",
-    text: "Se nota el uso de React, eventos, filtros y una buena lógica de interacción."
+    text: "EcoTech es mi primera opción para equipar mi oficina con tecnología que respeta el planeta."
   },
   {
     name: "Camila Rojas",
-    role: "Docente de tecnología",
-    text: "Muy buena propuesta para sustentar un proyecto final con alcance comercial real."
+    role: "Especialista ambiental",
+    text: "Es inspirador ver una tienda que prioriza la eficiencia energética en cada uno de sus productos."
   }
 ];
 
+// 2. Sliders actualizados con imágenes reales y textos de marca 
 const SLIDES = [
   {
     id: 1,
     className: "slide-1",
     title: "Tecnología que cuida el planeta",
-    text: "Aquí va imagen de un hogar moderno con paneles solares instalados.",
-    tag: "Imagen sugerida 1"
+    text: "Soluciones inteligentes diseñadas para reducir tu impacto ambiental sin sacrificar el rendimiento.",
+    image: "img/tecnologiaQueCuida.png", // 
+    tag: "Energía Limpia"
   },
   {
     id: 2,
     className: "slide-2",
-    title: "Compra eco con una experiencia moderna",
-    text: "Aquí va imagen de catálogo de productos sostenibles en laptop y celular.",
-    tag: "Imagen sugerida 2"
+    title: "Un catálogo pensado en el futuro",
+    text: "Cada producto en nuestra tienda ha sido seleccionado bajo estrictos estándares de sostenibilidad.",
+    image: "img/compraEco.png", // 
+    tag: "Consumo Consciente"
   },
   {
     id: 3,
     className: "slide-3",
-    title: "Automatización útil y elegante",
-    text: "Aquí va imagen de dispositivos smart para hogar u oficina ecoeficiente.",
-    tag: "Imagen sugerida 3"
+    title: "Hogares inteligentes y sostenibles",
+    text: "Transforma tu espacio con dispositivos de vanguardia que optimizan el uso de recursos naturales.",
+    image: "img/automatizacionUtil.png", // 
+    tag: "Innovación Eco"
   }
 ];
 
@@ -151,14 +155,14 @@ function Header({ cartCount, onOpenCart }) {
           <div className="logo-mark">E</div>
           <div>
             <div>EcoTech Store</div>
-            <small>SPA sostenible</small>
+            <small>Compromiso Verde</small>
           </div>
         </div>
 
         <nav className="nav">
           <a href="#inicio">Inicio</a>
           <a href="#catalogo">Catálogo</a>
-          <a href="#detalle">Detalle técnico</a>
+          <a href="#detalle">Sustento</a>
           <a href="#contacto">Contacto</a>
         </nav>
 
@@ -197,8 +201,13 @@ function HeroCarousel() {
           <p>{slide.text}</p>
         </div>
 
-        <div className="carousel-placeholder">
-          Aquí va el mockup o la imagen decorativa del slide.
+        {/* 3. Se reemplaza el marcador de posición por la imagen real del slider */}
+        <div className="carousel-placeholder" style={{ background: "none", border: "none", padding: 0, overflow: "hidden" }}>
+          <img 
+            src={slide.image} 
+            alt={slide.title} 
+            style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "18px" }} 
+          />
         </div>
       </div>
 
@@ -227,31 +236,29 @@ function Hero({ totalProducts }) {
     <section className="hero" id="inicio">
       <div className="container hero-grid">
         <div className="hero-copy">
-          <div className="eyebrow">Proyecto final - Desarrollo de Entornos Web</div>
-          <h1>Tienda virtual eco-tecnológica con SPA, React y formularios validados</h1>
+          <div className="eyebrow">Tu aliado en sostenibilidad tecnológica</div>
+          <h1>Innovación de vanguardia para un estilo de vida consciente</h1>
           <p>
-            EcoTech Store es una propuesta de comercio electrónico que integra catálogo dinámico,
-            carrito de compras, filtros, validaciones y un carrusel visual para demostrar dominio
-            técnico y diseño moderno.
+            En EcoTech Store, nuestra misión es facilitar el acceso a soluciones tecnológicas que minimicen el impacto ambiental, promoviendo un futuro donde la innovación y la ecología caminen siempre de la mano.
           </p>
 
           <div className="hero-actions">
-            <a href="#catalogo" className="btn btn-primary">Ver catálogo</a>
-            <a href="#detalle" className="btn btn-secondary">Ver sustento técnico</a>
+            <a href="#catalogo" className="btn btn-primary">Explorar catálogo</a>
+            <a href="#contacto" className="btn btn-secondary">Asesoría gratuita</a>
           </div>
 
           <div className="metrics">
             <div className="metric">
               <strong>{totalProducts}</strong>
-              <span>Productos</span>
+              <span>Eco-Soluciones</span>
             </div>
             <div className="metric">
-              <strong>SPA</strong>
-              <span>Navegación fluida</span>
+              <strong>100%</strong>
+              <span>Sostenible</span>
             </div>
             <div className="metric">
-              <strong>React</strong>
-              <span>Interfaz dinámica</span>
+              <strong>CO₂</strong>
+              <span>Huella Reducida</span>
             </div>
           </div>
         </div>
@@ -286,9 +293,9 @@ function Filters({ search, setSearch, category, setCategory, sort, setSort, cate
       </div>
 
       <div className="field">
-        <label>Ordenar</label>
+        <label>Ordenar por</label>
         <select value={sort} onChange={(e) => setSort(e.target.value)}>
-          <option value="default">Destacados</option>
+          <option value="default">Más recomendados</option>
           <option value="priceAsc">Precio: menor a mayor</option>
           <option value="priceDesc">Precio: mayor a menor</option>
           <option value="ratingDesc">Mejor valorados</option>
@@ -303,7 +310,6 @@ function ProductCard({ product, onAdd }) {
 
   return (
     <article className="card">
-      {/* 2. Actualización de contenedor de imagen de producto */}
       <div className="card-media">
         <img 
           src={product.image} 
@@ -330,14 +336,14 @@ function ProductCard({ product, onAdd }) {
 
         <div className="card-actions">
           <button className="btn btn-primary" onClick={() => onAdd(product)}>
-            Agregar al carrito
+            Añadir al carrito
           </button>
           
           <button
             className="btn btn-secondary"
             onClick={() => setIsExpanded(!isExpanded)}
           >
-            {isExpanded ? "Ocultar detalle" : "Ver detalle"}
+            {isExpanded ? "Ocultar ficha" : "Ver detalles técnicos"}
           </button>
         </div>
       </div>
@@ -347,10 +353,10 @@ function ProductCard({ product, onAdd }) {
           <h4>Especificaciones:</h4>
           <ul>
             <li><strong>Categoría:</strong> {product.category}</li>
-            <li><strong>Valoración:</strong> {product.rating} de 5 estrellas</li>
-            <li><strong>Disponibilidad:</strong> En stock (Envío eco-friendly)</li>
+            <li><strong>Impacto:</strong> Alta eficiencia energética</li>
+            <li><strong>Garantía:</strong> 2 años de soporte técnico</li>
           </ul>
-          <p>Producto certificado para la reducción de la huella de carbono.</p>
+          <p>Este producto cumple con los estándares internacionales de cuidado ambiental.</p>
         </div>
       )}
     </article>
@@ -388,10 +394,10 @@ function Catalog({ products, onAdd }) {
     <section className="section" id="catalogo">
       <div className="container">
         <div className="section-heading">
-          <div className="eyebrow">Catálogo dinámico</div>
-          <h2 className="section-title">Productos ecoeficientes</h2>
+          <div className="eyebrow">Selección Especial</div>
+          <h2 className="section-title">Productos para un mundo más limpio</h2>
           <p className="section-text">
-            Busca, filtra y ordena productos usando estado, eventos y arreglos de objetos.
+            Explora herramientas tecnológicas seleccionadas para optimizar el consumo de energía en tu hogar u oficina.
           </p>
         </div>
 
@@ -406,7 +412,7 @@ function Catalog({ products, onAdd }) {
         />
 
         {filteredProducts.length === 0 ? (
-          <div className="empty">No se encontraron productos con esos filtros.</div>
+          <div className="empty">No se encontraron productos que coincidan con tu búsqueda eco.</div>
         ) : (
           <div className="product-grid">
             {filteredProducts.map((product) => (
@@ -424,29 +430,27 @@ function TechnicalSection() {
     <section className="section" id="detalle">
       <div className="container two-col">
         <div className="panel">
-          <div className="eyebrow">Sustento técnico</div>
-          <h2 className="section-title">Aplicación de lo aprendido</h2>
+          <div className="eyebrow">Arquitectura Digital</div>
+          <h2 className="section-title">Nuestra Infraestructura Técnica</h2>
           <ul className="list">
-            <li>React con JSX y componentes reutilizables.</li>
-            <li>useState para filtros, carrito, formulario y carrusel.</li>
-            <li>useEffect para temporizador del slider automático.</li>
-            <li>Arreglos de objetos y renderizado con map.</li>
-            <li>Eventos onClick, onChange y onSubmit.</li>
-            <li>Validación de formulario con expresiones regulares.</li>
-            <li>Diseño responsive con HTML y CSS separados.</li>
+            <li>Interfaz construida con React para una respuesta inmediata.</li>
+            <li>Gestión de estados reactivos para filtros y carrito.</li>
+            <li>Sincronización de efectos para automatización visual.</li>
+            <li>Estructura de datos optimizada para carga rápida.</li>
+            <li>Validaciones de seguridad en comunicaciones externas.</li>
+            <li>Diseño adaptable a cualquier dispositivo móvil.</li>
           </ul>
         </div>
 
         <div className="panel">
-          <div className="eyebrow">Imágenes sugeridas</div>
-          <h2 className="section-title">Elementos visuales para decorar</h2>
+          <div className="eyebrow">Procesos de Mejora</div>
+          <h2 className="section-title">Garantía y Seguimiento</h2>
           <ul className="list">
-            <li>Aquí va imagen del mockup principal en laptop y móvil.</li>
-            <li>Aquí va imagen del mapa de sitio.</li>
-            <li>Aquí va imagen de wireframes de alta fidelidad.</li>
-            <li>Aquí va imagen del carrito con productos agregados.</li>
-            <li>Aquí va imagen del formulario validado correctamente.</li>
-            <li>Aquí va imagen del catálogo filtrado por categoría.</li>
+            <li>Monitoreo constante del catálogo de productos.</li>
+            <li>Optimización de recursos en la plataforma digital.</li>
+            <li>Actualizaciones de seguridad periódicas.</li>
+            <li>Flujo de compra intuitivo y seguro.</li>
+            <li>Atención al cliente personalizada y rápida.</li>
           </ul>
         </div>
       </div>
@@ -458,8 +462,8 @@ function ReviewsSection() {
   return (
     <section className="section">
       <div className="container panel">
-        <div className="eyebrow">Reseñas simuladas</div>
-        <h2 className="section-title">Opiniones de usuarios</h2>
+        <div className="eyebrow">Testimonios Reales</div>
+        <h2 className="section-title">Confianza Verde</h2>
 
         {REVIEWS.map((review, index) => (
           <div className="review" key={index}>
@@ -488,19 +492,19 @@ function ContactForm() {
   const validators = {
     nombre: {
       pattern: /^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:\s+[A-Za-zÁÉÍÓÚáéíóúÑñ]+){1,}$/,
-      error: "Ingresa nombre y apellido válidos."
+      error: "Por favor, ingresa tu nombre y apellido completo."
     },
     correo: {
       pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      error: "Ingresa un correo válido."
+      error: "Ingresa un correo electrónico válido."
     },
     celular: {
       pattern: /^9\d{8}$/,
-      error: "Ingresa un celular peruano válido de 9 dígitos."
+      error: "Ingresa un número de celular de 9 dígitos."
     },
     mensaje: {
       pattern: /^.{15,}$/,
-      error: "Escribe un mensaje de al menos 15 caracteres."
+      error: "El mensaje debe tener al menos 15 caracteres."
     }
   };
 
@@ -532,11 +536,11 @@ function ContactForm() {
 
     const hasErrors = Object.values(newErrors).some((error) => error !== "");
     if (hasErrors) {
-      setMessage("Corrige los campos antes de enviar.");
+      setMessage("Por favor, revisa los campos antes de enviar.");
       return;
     }
 
-    setMessage("Formulario enviado correctamente. Aquí puedes explicar que en una versión real se conectaría a una base de datos o API.");
+    setMessage("¡Gracias! Tu solicitud ha sido recibida. Un asesor se pondrá en contacto contigo pronto.");
     setForm(initialForm);
   };
 
@@ -544,29 +548,29 @@ function ContactForm() {
     <section className="section" id="contacto">
       <div className="container two-col">
         <div className="panel">
-          <div className="eyebrow">Formulario validado</div>
-          <h2 className="section-title">Solicita asesoría eco tecnológica</h2>
+          <div className="eyebrow">Atención Directa</div>
+          <h2 className="section-title">¿Necesitas asesoría personalizada?</h2>
           <p className="section-text">
-            Este formulario demuestra validación con expresiones regulares y manejo de eventos.
+            Si tienes dudas sobre qué solución es la mejor para tu espacio, déjanos tus datos y un experto te ayudará a elegir.
           </p>
         </div>
 
         <div className="panel">
           <form onSubmit={handleSubmit}>
             <div className="field">
-              <label>Nombre completo</label>
+              <label>Nombre y Apellido</label>
               <input
                 type="text"
                 name="nombre"
                 value={form.nombre}
                 onChange={handleChange}
-                placeholder="Alfred Berceras Ancobar"
+                placeholder="Ej. Juan Pérez"
               />
               <span className="error">{errors.nombre}</span>
             </div>
 
             <div className="field">
-              <label>Correo electrónico</label>
+              <label>Correo Electrónico</label>
               <input
                 type="text"
                 name="correo"
@@ -578,34 +582,34 @@ function ContactForm() {
             </div>
 
             <div className="field">
-              <label>Celular</label>
+              <label>Teléfono de contacto</label>
               <input
                 type="text"
                 name="celular"
                 value={form.celular}
                 onChange={handleChange}
-                placeholder="999888777"
+                placeholder="99999cito"
               />
               <span className="error">{errors.celular}</span>
             </div>
 
             <div className="field">
-              <label>Mensaje</label>
+              <label>Consulta o requerimiento</label>
               <textarea
                 name="mensaje"
                 rows="5"
                 value={form.mensaje}
                 onChange={handleChange}
-                placeholder="Deseo información sobre productos sostenibles para mi empresa."
+                placeholder="Describe brevemente lo que necesitas..."
               ></textarea>
               <span className="error">{errors.mensaje}</span>
             </div>
 
             <button className="btn btn-primary" type="submit">
-              Enviar solicitud
+              Enviar consulta
             </button>
 
-            <div className={`form-message ${message.includes("correctamente") ? "success" : ""}`}>
+            <div className={`form-message ${message.includes("recibida") ? "success" : ""}`}>
               {message}
             </div>
           </form>
@@ -640,16 +644,15 @@ function CartDrawer({ open, onClose, cart, setCart }) {
 
       <aside className={`cart-drawer ${open ? "open" : ""}`}>
         <div className="cart-header">
-          <h3>Carrito de compras</h3>
+          <h3>Tu Selección Eco</h3>
         </div>
 
         <div className="cart-items">
           {cart.length === 0 ? (
-            <div className="empty">Tu carrito está vacío.</div>
+            <div className="empty">Aún no has seleccionado productos sostenibles.</div>
           ) : (
             cart.map((item) => (
               <div className="cart-item" key={item.id}>
-                {/* 3. Actualización de imagen en el carrito */}
                 <div className="cart-icon">
                   <img 
                     src={item.image} 
@@ -675,25 +678,25 @@ function CartDrawer({ open, onClose, cart, setCart }) {
         </div>
 
         <div className="cart-footer">
-          <p><strong>Subtotal:</strong> {formatCurrency(total)}</p>
+          <p><strong>Total estimado:</strong> {formatCurrency(total)}</p>
           <div style={{ display: "flex", gap: ".7rem", marginTop: ".8rem" }}>
             <button
               className="btn btn-primary"
               onClick={() => {
                 if (cart.length === 0) {
-                  alert("Agrega productos al carrito.");
+                  alert("Agrega productos para iniciar tu compra consciente.");
                   return;
                 }
-                alert("Compra simulada realizada con éxito.");
+                alert("¡Gracias por preferir EcoTech! Procesando tu pedido sostenible...");
                 setCart([]);
                 onClose();
               }}
             >
-              Finalizar compra
+              Confirmar pedido
             </button>
 
             <button className="btn btn-secondary" onClick={onClose}>
-              Cerrar
+              Seguir explorando
             </button>
           </div>
         </div>
@@ -736,7 +739,7 @@ function App() {
       <ContactForm />
       <footer className="footer">
         <div className="container">
-          EcoTech Store SPA - Proyecto académico de Desarrollo de Entornos Web
+          EcoTech Store - Tecnología responsable para un futuro mejor
         </div>
       </footer>
 
